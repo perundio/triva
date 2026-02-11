@@ -3,11 +3,12 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![CI](https://github.com/your-username/smtp-form-relay/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/smtp-form-relay/actions/workflows/ci.yml)
 
 A minimal, secure **form relay** that forwards HTML form submissions to **email** (SMTP) or **Telegram**. Point your
 form `action` at `https://your-service/v1/recipient` — use an email address or a Telegram chat ID as the recipient. No
 backend logic needed on your site.
+
+![Secure relay — your endpoint and landing](docs/relay-screenshot.png)
 
 ---
 
