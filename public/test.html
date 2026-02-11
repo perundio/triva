@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Test form · Secure Relay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+<div class="page-shell">
+    <header class="site-header">
+        <a href="/" class="logo">
+            <img src="/logo.png" alt="" class="logo-mark" width="32" height="32" />
+            <div>
+                <div class="logo-text-main">Secure Relay</div>
+                <div class="logo-text-sub">forms → inbox / telegram</div>
+            </div>
+        </a>
+        <nav class="header-nav">
+            <a href="/" class="header-link">Home</a>
+            <a href="/#action" class="header-link">Your link</a>
+            <span class="header-pill">
+                <span class="header-pill-dot" aria-hidden="true"></span>
+                <span>Test form</span>
+            </span>
+        </nav>
+    </header>
+
+    <section class="section" id="test-form-section">
+        <div class="section-header">
+            <div class="section-title"><span>&gt;</span> <span>Test form</span> <div class="section-title-line"></div></div>
+            <div class="section-subtitle">Set the form action URL and submit to test your relay endpoint.</div>
+        </div>
+        <div class="contact-shell test-form-shell">
+            <div>
+                <div class="contact-title">$ <span class="accent-text">form_action --url</span></div>
+                <form id="testForm" method="POST" action="" novalidate>
+                    <div class="contact-field">
+                        <label class="contact-label" for="formActionUrl">&gt; form action URL</label>
+                        <input type="text" class="contact-input" id="formActionUrl" placeholder="you@example.com or 123456789" autocomplete="off">
+                        <p class="test-form-hint">Valid email address or Telegram chat ID (digits only). Full URL also allowed (e.g. https://this-site.com/you%40example.com).</p>
+                    </div>
+                    <div class="contact-field">
+                        <label class="contact-label" for="testName">&gt; name</label>
+                        <input type="text" class="contact-input" id="testName" name="name" placeholder="Test User" autocomplete="name">
+                    </div>
+                    <div class="contact-field">
+                        <label class="contact-label" for="testEmail">&gt; email</label>
+                        <input type="email" class="contact-input" id="testEmail" name="email" placeholder="test@example.com" autocomplete="email">
+                    </div>
+                    <div class="contact-field">
+                        <label class="contact-label" for="testMessage">&gt; message</label>
+                        <textarea class="contact-input contact-textarea" id="testMessage" name="message" placeholder="Test message for relay ..."></textarea>
+                    </div>
+                    <div class="test-form-actions">
+                        <button type="submit" class="contact-btn" id="testSubmit">[ SEND ]</button>
+                        <span class="test-form-method">
+                            <label><input type="radio" name="_method" value="POST" checked> POST</label>
+                            <label><input type="radio" name="_method" value="GET"> GET</label>
+                        </span>
+                        <p class="test-form-hint-inline">Relay expects POST with application/x-www-form-urlencoded.</p>
+                    </div>
+                </form>
+            </div>
+            <div class="contact-info">
+                <span>Use the field above: <strong class="accent-text">valid email</strong> (e.g. you@example.com) or <strong class="accent-text">Telegram chat ID</strong> (numeric). Submit to verify delivery.</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="/" class="footer-link">Home</a>
+            <a href="/#action" class="footer-link">Your link</a>
+        </div>
+        <div>© <span id="year"></span> Secure Relay. Test page.</div>
+    </footer>
+</div>
+<script src="/test.js" defer></script>
+</body>
+</html>

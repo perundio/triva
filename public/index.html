@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Secure Relay – Stateless, encrypted form-to-inbox/telegram bridge · Open source</title>
+    <meta name="description" content="Secure Relay is a stateless, zero-storage relay for form submissions. Encrypt, forward, forget. Open source, GDPR-friendly, free." />
+    <meta name="keywords" content="form relay, webhook, stateless, zero storage, encryption, telegram bot, open source, gdpr, secure forms" />
+    <meta name="author" content="Secure Relay Team" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="canonical" href="https://triva.perund.io" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Secure Relay – Stateless form relay" />
+    <meta property="og:description" content="Forward form submissions to email or Telegram. Encrypted, zero logs, open source." />
+    <meta property="og:image" content="https://triva.perund.io/logo.png" />
+    <meta property="og:url" content=https://triva.perund.io/" />
+    <meta property="og:site_name" content="Secure Relay" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Secure Relay – No‑database form bridge" />
+    <meta name="twitter:description" content="Stateless, encrypted, open‑source. Get form submissions directly to your inbox or Telegram." />
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","name":"Secure Relay","url":"https://triva.perund.io/","description":"Stateless, encrypted relay for form submissions. No databases, no logs, open source.","author":{"@type":"Organization","name":"Secure Relay"},"inLanguage":"en"}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+<div class="page-shell">
+    <header class="site-header" id="siteHeader">
+        <div class="logo">
+            <img src="/logo.png" alt="" class="logo-mark" width="32" height="32" />
+            <div>
+                <div class="logo-text-main">Secure Relay</div>
+                <div class="logo-text-sub">forms → inbox / telegram</div>
+            </div>
+        </div>
+        <nav class="header-nav">
+            <a href="https://github.com/secure-relay" target="_blank" rel="noopener" class="header-github">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                <span>GitHub</span>
+            </a>
+            <button type="button" class="header-link" data-scroll="action">Relay link</button>
+            <button type="button" class="header-link" data-scroll="how">How it works</button>
+            <button type="button" class="header-link" data-scroll="trust">Security</button>
+            <a href="/test" class="header-link">Test</a>
+            <button type="button" class="header-link" data-scroll="donate">Donate</button>
+            <div class="header-pill">
+                <span class="header-pill-dot" aria-hidden="true"></span>
+                <span>Stateless relay · Zero storage</span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-action" id="action">
+        <div class="hero-action-head">
+            <h1 class="hero-action-title">Your secure relay link</h1>
+            <p class="hero-action-subtitle">Email or Telegram — one endpoint. No storage, no tracking.</p>
+        </div>
+        <div class="action-shell" data-animate="action">
+            <div class="action-input-block">
+                <div class="action-label">$ Your endpoint</div>
+                <div class="action-input-row">
+                    <div class="action-input-wrap">
+                        <span class="action-input-prefix" id="action-origin-prefix">/</span>
+                        <label for="slug-input"></label><input id="slug-input" class="action-input" type="text" placeholder="you@example.com or @username" spellcheck="false" autocomplete="off" />
+                    </div>
+                </div>
+                <p class="action-note">
+                    Link is generated instantly. Use it as your form <code>action</code> URL. For Telegram: get your chat ID from the bot below.
+                </p>
+            </div>
+            <div class="action-console" id="action-console">
+                <div class="action-console-line"><span class="action-console-prefix">&gt;</span><span class="action-console-muted">Enter email or Telegram chat ID to get your link.</span></div>
+            </div>
+            <div id="telegramHint" class="telegram-hint">
+                <strong>📲 Telegram setup</strong><br>
+                1. Open the bot <span id="telegramBotLink" class="accent-text">@Bot</span>.<br>
+                2. Press <span class="accent-text">Start</span> (or send /start).<br>
+                3. Get your <span class="accent-text">chat ID</span> (code) from the bot reply.<br>
+                4. Paste that code in the field above — form submissions will go to your Telegram.
+            </div>
+        </div>
+    </section>
+
+    <section class="hero hero-secondary" id="top">
+        <div>
+            <div class="hero-kicker"><span class="hero-kicker-dot"></span><span>Secure form-to-inbox bridge</span></div>
+            <h1 class="hero-title">Forms → Inbox / Telegram.<br>No databases. No traces.</h1>
+            <p class="hero-subtitle">Get form submissions delivered directly to your Email or Telegram. We process, encrypt, and forward instantly—never storing a single byte.</p>
+            <div class="hero-badges">
+                <span class="hero-badge">Zero storage · Stateless relay</span>
+                <span class="hero-badge">Encryption</span>
+                <span class="hero-badge">GDPR-friendly by design</span>
+            </div>
+        </div>
+        <div>
+            <div class="hero-console" data-animate="hero-console">
+                <div class="hero-console-header">
+                    <div class="hero-console-dots" aria-hidden="true"><span class="hero-console-dot red"></span><span class="hero-console-dot yellow"></span><span class="hero-console-dot green"></span></div>
+                    <span>secure-relay.sh</span>
+                </div>
+                <div class="hero-console-body">
+                    <div class="hero-console-line">
+                        <span class="hero-console-prefix">$</span>
+                        <span class="hero-console-typed" id="hero-typed"></span>
+                        <span class="hero-console-cursor" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="hero-console-footer">
+                    <div class="hero-console-status"><span class="hero-console-status-dot"></span><span>status: live · latency &lt; 50ms</span></div>
+                    <div class="hero-console-tag">no logs · no storage</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="how">
+        <div class="section-header">
+            <div class="section-title"><span>&gt;</span> How it works <div class="section-title-line"></div></div>
+            <div class="section-subtitle">Minimal setup. Four steps. Fully stateless.</div>
+        </div>
+        <div class="how-grid">
+            <article class="how-card" data-animate="card">
+                <div class="how-step-label">Step 01</div>
+                <h3 class="how-title">Create secure endpoint link</h3>
+                <p class="how-body">Generate a unique, encrypted endpoint bound to your Email or Telegram handle.</p>
+                <div class="how-visual"><span class="how-icon" aria-hidden="true">&lt;/&gt;</span><code>relay create --target you@example.com</code></div>
+            </article>
+            <article class="how-card" data-animate="card">
+                <div class="how-step-label">Step 02</div>
+                <h3 class="how-title">Paste into any form</h3>
+                <p class="how-body">Drop the endpoint into your form's webhook or notification email field—no SDKs, no vendor lock-in.</p>
+                <div class="how-visual"><span class="how-icon" aria-hidden="true">⌘</span><code>action URL: https://triva.perund.io/xyz-abc-123</code></div>
+            </article>
+            <article class="how-card" data-animate="card">
+                <div class="how-step-label">Step 03</div>
+                <h3 class="how-title">User submits the form</h3>
+                <p class="how-body">Visitors fill out your form as usual. We intercept the payload for a split second.</p>
+                <div class="how-visual"><span class="how-icon" aria-hidden="true">⇪</span><code>{ name: "Ada", email: "..." }</code></div>
+            </article>
+            <article class="how-card" data-animate="card">
+                <div class="how-step-label">Step 04</div>
+                <h3 class="how-title">Instant encrypted forward</h3>
+                <p class="how-body">The submission is encrypted, forwarded to you, and then wiped. No logs, no database, nothing to leak.</p>
+                <div class="how-visual"><span class="how-icon" aria-hidden="true">⚡</span><code>→ inbox / telegram · then /dev/null</code></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="section" id="trust">
+        <div class="section-header">
+            <div class="section-title"><span>&gt;</span> Trust &amp; security <div class="section-title-line"></div></div>
+            <div class="section-subtitle">Zero storage. Full privacy. Designed like a stateless function.</div>
+        </div>
+        <div class="trust-shell" data-animate="trust">
+            <div>
+                <h2 class="trust-title">Zero storage. <span>Full privacy.</span></h2>
+                <p class="trust-body">Secure Relay acts as a stateless, encrypted bridge between your forms and your inbox or Telegram. Data passes through our infrastructure, is transformed and delivered, then immediately discarded. No databases, no logs, no analytics on your payloads—just a minimal, auditable relay.</p>
+            </div>
+            <div class="trust-badges">
+                <div class="trust-badge"><span class="trust-badge-icon" aria-hidden="true">🔐</span><div><span class="trust-badge-text-main">Enncryption</span><span class="trust-badge-text-sub">Payloads are encrypted in transit and at the edge.</span></div></div>
+                <div class="trust-badge"><span class="trust-badge-icon" aria-hidden="true">⚖️</span><div><span class="trust-badge-text-main">GDPR compliant</span><span class="trust-badge-text-sub">No personal data stored, no profiling, no tracking.</span></div></div>
+                <div class="trust-badge"><span class="trust-badge-icon" aria-hidden="true">💾</span><div><span class="trust-badge-text-main">No databases</span><span class="trust-badge-text-sub">No tables, no backups, nothing to exfiltrate.</span></div></div>
+                <div class="trust-badge"><span class="trust-badge-icon" aria-hidden="true">📂</span><div><span class="trust-badge-text-main">Open-source core</span><span class="trust-badge-text-sub">Inspect, self-host, or extend the relay logic.</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="donate">
+        <div class="donate-shell">
+            <div class="donate-intro">
+                <span class="donate-badge">♥︎ support the relay</span>
+                <h2 class="donate-title">Keep us <span>stateless</span></h2>
+                <p class="donate-desc">No databases, no investors – only users. Your donation pays for servers and keeps the relay free for everyone.</p>
+                <div class="donate-stats">
+                    <span class="donate-stat"><strong>Zero</strong> tracking</span>
+                    <span class="donate-stat"><strong>Zero</strong> ads</span>
+                    <span class="donate-stat"><strong>Open</strong> source</span>
+                </div>
+            </div>
+            <div class="donate-btn-wrap">
+                <a href="https://nowpayments.io/donation?api_key=95353c06-b96d-4652-8e0a-c97b2594d840" target="_blank" rel="noreferrer noopener" class="donate-btn-link">
+                    <img src="https://nowpayments.io/images/embeds/donation-button-black.svg" alt="Crypto donation button by NOWPayments" width="200" height="56">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-links">
+            <span class="footer-link">Status</span>
+        </div>
+        <div>© <span id="year"></span> Secure Relay. All rights reserved.</div>
+    </footer>
+</div>
+<script src="/main.js" defer></script>
+</body>
+</html>
